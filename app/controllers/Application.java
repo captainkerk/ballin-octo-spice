@@ -63,7 +63,16 @@ public class Application extends Controller {
 
     public static Result healthcheckTwo()
     {
-        return ok();
+        DateTime dateTime = new DateTime();
+
+        if(dateTime.getMinuteOfDay() % 2 == 0)
+        {
+            return ok();
+        }
+        else
+        {
+            return badRequest();
+        }
     }
 
 

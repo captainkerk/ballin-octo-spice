@@ -46,7 +46,11 @@
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
         <h1>Users:</h1>
-        <div id="users-result"></div>
+        <div>
+            <ul id="users-result">
+
+            </ul>
+        </div>
         <div>
         <h3>This is using jQuery AJAX to hit a RESTful web service that queries a database for users.</h3>
         </div>
@@ -56,6 +60,8 @@
             <div id="monitors-result1">
             </div>
             <div id="monitors-result2">
+            </div>
+            <div id="monitors-users">
             </div>
             <h3>This is also using jQuery AJAX to hit a few webservices that are designed to monitor the application.</h3>
         </div>
@@ -73,6 +79,46 @@
 
 <script>
 
+$(document).ready(function() {
+        users = [];
+
+        request = $.get( '/users', function( data ) {
+            for(i = 0; i < data.length; i++) {
+                var user = new Object();
+                user.name = data.users[i];
+                users.push(user);
+            }
+            $('#monitors-users').append('<div class="up">Users monitor is reporting ok.</div>');
+
+        });
+        request.error(function(jqXHR, textStatus, errorThrow){
+            $('#monitors-users').append('<div class="down">Users monitor is down.</div>');
+        });
+        request.always(function () {
+            drawUsers(users);
+        });
+
+        hc1 = $.get( '/hc1', function( data ) {
+            $('#monitors-result1').append('<div class="up">Monitor #1 is reporting ok.</div>');
+        });
+        hc1.error(function(jqXHR, textStatus, errorThrow){
+            $('#monitors-result1').append('<div class="down">Monitor #1 is down.</div>');
+        });
+
+        hc2 = $.get( '/hc2', function( data ) {
+            $('#monitors-result2').append('<div class="up">Monitor #2 is reporting ok.</div>');
+        });
+        hc2.error(function(jqXHR, textStatus, errorThrow){
+            $('#monitors-result2').append('<div class="down">Monitor #2 is down.</div>');
+        });
+
+
+        function drawUsers(users) {
+            users.forEach(function(user) {
+                $('#users-result').append('<li>' + user.name + '</li>');
+            });
+        }
+});
 
 </script>
 </body>

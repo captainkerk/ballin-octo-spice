@@ -6,3 +6,27 @@ body {
     margin-top: 200px;
     border-top: 1px solid #101010;
 }
+
+#users-result li {
+  padding: 10px 10px;
+  background-color: #333333;
+  color: #ffffff;
+  margin-right: 3px;
+  list-style-type: none;
+  #
+}
+
+#users-result li:nth-child(odd) {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+.up {
+  padding: 10px 10px;
+  background-color: #52D273;
+}
+
+.down {
+  padding: 10px 10px;
+  background-color: #E82C0C;
+}
