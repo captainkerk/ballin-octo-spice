@@ -1,4 +1,2 @@
-This is your new Play application
-=================================
+This is a small app to demo some AWS virtual infrastructure.
 
-This file will be packaged with your application, when using `activator dist`.
