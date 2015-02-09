@@ -7,6 +7,10 @@ body {
     border-top: 1px solid #101010;
 }
 
+#users-result {
+    padding-left: 0px;
+}
+
 #users-result li {
   padding: 10px 10px;
   background-color: #333333;
