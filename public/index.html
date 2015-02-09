@@ -2,18 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
     <title>Demo for Civis!</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="./assets/stylesheets/custom.css" rel="stylesheet">
 </head>
 
@@ -43,7 +36,6 @@
 
 <div class="container">
 
-    <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
         <h1>Users:</h1>
         <div>
@@ -69,10 +61,13 @@
 
 </div> <!-- /container -->
 
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">Copyleft 2015 John Kerkstra - Find this project on <a href="https://github.com/captainkerk/ballin-octo-spice">GitHib!</a></p>
+    </div>
+</footer>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
@@ -80,44 +75,43 @@
 <script>
 
 $(document).ready(function() {
-        users = [];
+    users=[];
 
-        request = $.get( '/users', function( data ) {
-            for(i = 0; i < data.length; i++) {
-                var user = new Object();
-                user.name = data.users[i];
-                users.push(user);
-            }
-            $('#monitors-users').append('<div class="up">Users monitor is reporting ok.</div>');
-
-        });
-        request.error(function(jqXHR, textStatus, errorThrow){
-            $('#monitors-users').append('<div class="down">Users monitor is down.</div>');
-        });
-        request.always(function () {
-            drawUsers(users);
-        });
-
-        hc1 = $.get( '/hc1', function( data ) {
-            $('#monitors-result1').append('<div class="up">Monitor #1 is reporting ok.</div>');
-        });
-        hc1.error(function(jqXHR, textStatus, errorThrow){
-            $('#monitors-result1').append('<div class="down">Monitor #1 is down.</div>');
-        });
-
-        hc2 = $.get( '/hc2', function( data ) {
-            $('#monitors-result2').append('<div class="up">Monitor #2 is reporting ok.</div>');
-        });
-        hc2.error(function(jqXHR, textStatus, errorThrow){
-            $('#monitors-result2').append('<div class="down">Monitor #2 is down.</div>');
-        });
-
-
-        function drawUsers(users) {
-            users.forEach(function(user) {
-                $('#users-result').append('<li>' + user.name + '</li>');
-            });
+    request=$.get( '/users', function( data ) {
+        for(i = 0; i < data.length; i++) {
+            var user = new Object();
+            user.name = data.users[i];
+            users.push(user);
         }
+        $('#monitors-users').append('<div class="up">Database monitor is reporting ok.</div>');
+
+    });
+    request.error(function(jqXHR, textStatus, errorThrow){
+        $('#monitors-users').append('<div class="down">Database monitor is down.</div>');
+    });
+    request.always(function () {
+        drawUsers(users);
+    });
+
+    hc1=$.get( '/hc1', function( data ) {
+        $('#monitors-result1').append('<div class="up">Monitor #1 is reporting ok.</div>');
+    });
+    hc1.error(function(jqXHR, textStatus, errorThrow){
+        $('#monitors-result1').append('<div class="down">Monitor #1 is down.</div>');
+    });
+
+    hc2=$.get( '/hc2', function( data ) {
+        $('#monitors-result2').append('<div class="up">Monitor #2 is reporting ok.</div>');
+    });
+    hc2.error(function(jqXHR, textStatus, errorThrow){
+        $('#monitors-result2').append('<div class="down">Monitor #2 is down.</div>');
+    });
+
+    function drawUsers(users) {
+        users.forEach(function(user) {
+            $('#users-result').append('<li>' + user.name + '</li>');
+        });
+    }
 });
 
 </script>
